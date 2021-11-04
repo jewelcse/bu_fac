@@ -1,5 +1,7 @@
 package com.budev.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +27,8 @@ public class Authority {
     private String authority;
 
 
-    @ManyToMany(mappedBy = "authorities")
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "authorities")
+    @JsonIgnore
     private Collection<User> users;
 
 }
