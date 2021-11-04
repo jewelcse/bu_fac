@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+<div th:replace="/fragments/header :: header"></div>
+
+<div class="container">
+    <div th:if="${param.error}">
+        <p class="alert-red">Invalid username and/or password</p>
+    </div>
+    <div th:if="${param.logout}">
+        <p class="alert-green"> You have been successfully logged out</p>
+    </div>
+
+</div>
+
+<h1>Index page</h1>
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>

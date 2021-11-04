@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head"></head>
+<body>
+
+<div th:replace="/fragments/header :: header"></div>
+
+<div class="container">
+
+    <div th:if="${param.success}">
+        <p class="alert-green">Update Publication Success!</p>
+    </div>
+    <form action="#"
+          th:action="@{'/update-publication/'+${publication.getPublication_id()}}"
+          th:object="${publication}"
+          method="post">
+        <h2 class="item-middle">Edit Publication</h2>
+        <div>
+            <label>
+                <div class="alert-red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</div>
+                <input type="text" th:field="*{title}" th:name="title" th:value="${publication.getTitle()}"/>
+            </label>
+        </div>
+        <div>
+            <label>
+                <div class="alert-red" th:if="${#fields.hasErrors('body')}" th:errors="*{body}">Body Error</div>
+                <textarea name="content" id="editor" th:name="body" th:field="*{body}" rows="10" th:value=" ${publication.getBody}">
+
+                </textarea>
+            </label>
+        </div>
+        <div class="float-left">
+            <button class="green-btn" type="submit">Save</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+
+</body>
+</html>

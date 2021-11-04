@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+
+<div th:replace="/fragments/header :: header"></div>
+
+
+<h1 class="item-middle">Add New Role</h1>
+
+<div class="container">
+
+    <div th:if="${param.success}">
+        <p class="alert-green">Create Role Success!</p>
+    </div>
+
+    <div th:if="${param.duplicate}">
+        <p class="alert-green">Already Exit!</p>
+    </div>
+
+    <form class="role-form" th:action="@{/save-new-role}" method="post">
+        <div>
+            <input type="text" name="authorityName" id="authorityName" placeholder="role name" required="true" autofocus="true"/>
+        </div>
+        <div>
+            <input type="submit" class="green-btn blue-btn" value="Create Role"/>
+        </div>
+
+    </form>
+
+</div>
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+
+</body>
+</html>

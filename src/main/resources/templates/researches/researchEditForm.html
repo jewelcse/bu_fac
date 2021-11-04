@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head"></head>
+<body>
+
+<div th:replace="/fragments/header :: header"></div>
+
+<div class="container">
+
+    <div th:if="${param.success}">
+        <p class="alert-green">Save Success!</p>
+    </div>
+    <form action="#"
+          th:action="@{'/update-research/'+${research.getResearch_id()}}"
+          th:object="${research}"
+          method="post">
+        <h2 class="item-middle">Edit Research</h2>
+        <div>
+            <label>
+                <input type="text" th:field="*{title}" th:name="title" th:value="${research.getTitle()}" />
+            </label>
+        </div>
+        <div>
+            <label>
+                <textarea name="content" id="editor" th:field="*{body}" rows="10" th:value="${research.getBody()}"></textarea>
+            </label>
+        </div>
+        <div class="float-left">
+            <button class="green-btn" type="submit">update</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+
+</body>
+</html>

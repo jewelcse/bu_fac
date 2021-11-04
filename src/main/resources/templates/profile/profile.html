@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+<div th:replace="/fragments/header :: header"></div>
+
+<div class="container">
+    <div th:if="${param.error}">
+        <p class="alert-red">Invalid username and/or password</p>
+    </div>
+
+    <div th:if="${param.success}">
+        <p class="alert-green">Profile Updated</p>
+    </div>
+
+    <div th:if="${param.updatePass}">
+        <p class="alert-green">Password reset</p>
+    </div>
+
+    <div th:if="${param.logout}">
+        <p class="alert-green"> You have been successfully logged out</p>
+    </div>
+
+    <div th:if="${param.remove}">
+        <p class="alert-green"> Removed Success</p>
+    </div>
+
+</div>
+
+<h1>Basic Info</h1>
+
+<div class="profile">
+    <div class="profile-item-update">
+        <a th:href="@{/edit-profile}" class="green-btn" >Update Profile</a>
+    </div>
+    <div class="profile-item-update">
+        <a th:href="@{/reset-password}" class="green-btn profile-border">Reset Password</a>
+    </div>
+    <div class="profile-item">
+        <p>First Name: <span class="profile-text" th:text="*{user.getFirst_name()}"></span></p>
+    </div>
+    <div class="profile-item">
+        <p>Last Name: <span th:text="*{user.getLast_name()}"></span></p>
+    </div>
+    <div class="profile-item">
+        <p>Username: <span th:text="*{user.getUsername()}"></span></p>
+    </div>
+    <div class="profile-item">
+        <p>Email: <span th:text="*{user.getEmail()}"></span></p>
+    </div>
+    <div class="profile-item">
+        <p>Designation: <span th:text="*{user.getDesignation()}"></span></p>
+    </div>
+
+    <div class="profile-item">
+        <p>HEDL: <span th:text="*{user.getHighest_education_level()}"></span></p>
+    </div>
+    <div class="profile-item">
+        <p>Department: <span th:text="*{user.getDepartment()}"></span></p>
+    </div>
+    <div class="profile-item">
+        <p>Cell No: <span th:text="*{user.getCell_phone()}"></span></p>
+    </div>
+</div>
+<br>
+
+<h1>Research Interest</h1>
+
+<ul class="box" th:each="research : ${researches}">
+    <div class="item-update">
+        <a th:href="@{/edit-research/{id}(id=${research.getResearch_id()})}" class="green-btn">Edit</a>
+    </div>
+    <div class="item-update">
+        <a th:href="@{/remove-research/{id}(id=${research.getResearch_id()})}" class="red-btn">Delete</a>
+    </div>
+    <li  th:utext="*{research.getTitle()}"> </li>
+    <li  th:utext="*{research.getBody()}"> </li>
+</ul>
+
+<br>
+
+
+<h1>Publication</h1>
+<ul class="box" th:each="publication : ${publications}">
+    <div class="item-update">
+        <a th:href="@{/edit-publication/{id}(id=${publication.getPublication_id()})}" class="green-btn">Edit</a>
+    </div>
+    <div class="item-update">
+        <a th:href="@{/remove-publication/{id}(id=${publication.getPublication_id()})}" class="red-btn">Delete</a>
+    </div>
+    <li  th:utext="*{publication.getTitle()}"> </li>
+    <li  th:utext="*{publication.getBody()}"> </li>
+</ul>
+
+
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>

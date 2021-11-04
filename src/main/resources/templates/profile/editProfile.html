@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head"></head>
+<body>
+
+<div th:replace="/fragments/header :: header"></div>
+
+<div class="container">
+
+    <div th:if="${param.success}">
+        <p class="alert-green">Save Success!</p>
+    </div>
+    <form action="#"
+          th:action="@{'/update-profile'}"
+          th:object="${user}"
+          method="post">
+        <h2 class="item-middle">Update Profile</h2>
+        <div class="profile">
+            <div class="profile-item">
+                <p> First Name: <input type="text" name="first_name" th:field="*{first_name}" th:value="${user.getFirst_name()}"/></p>
+            </div>
+            <div class="profile-item">
+                <p> Last Name: <input type="text" name="last_name" th:field="*{last_name}" th:value="${user.getLast_name()}"/></p>
+            </div>
+            <div class="profile-item">
+                <p> Username: <input type="text" name="username" th:field="*{username}" readonly th:value="${user.getUsername()}"/></p>
+            </div>
+            <div class="profile-item">
+                <p> Email: <input type="text" name="email" th:field="*{email}" th:value="${user.getEmail()}"/></p>
+            </div>
+            <div class="profile-item">
+                <p> Designation: <input type="text" name="designation" th:field="*{designation}" th:value="${user.getDesignation()}"/></p>
+            </div>
+            <div class="profile-item">
+                <p> HEDL: <input type="text" name="highest_education_level" th:field="*{highest_education_level}" th:value="${user.getHighest_education_level()}" /></p>
+            </div>
+
+            <div class="profile-item">
+                <p> Department: <input type="text" name="department" th:field="*{department}" th:value="${user.getDepartment()}"/></p>
+            </div>
+            <div class="profile-item">
+                <p> Cell No: <input type="text" name="cell_phone" th:field="*{cell_phone}" th:value="${user.getCell_phone()}"/></p>
+            </div>
+
+        </div>
+        <div class="float-left">
+            <button class="green-btn" type="submit">Update</button>
+        </div>
+    </form>
+</div>
+
+
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+
+</body>
+</html>

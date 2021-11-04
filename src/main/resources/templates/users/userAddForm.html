@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head"></head>
+<body>
+
+<div th:replace="/fragments/header :: header"></div>
+
+<div class="container">
+
+    <div th:if="${param.success}">
+        <p class="alert-green">Save Success!</p>
+    </div>
+    <form action="#"
+          th:action="@{'/save-user'}"
+          th:object="${user}"
+          method="post">
+        <h2 class="item-middle">Create User Profile</h2>
+        <div class="profile">
+            <div class="profile-item">
+                <p> First Name: <input type="text" name="first_name" th:field="*{first_name}"/></p>
+            </div>
+            <div class="profile-item">
+                <p> Last Name: <input type="text" name="last_name" th:field="*{last_name}"/></p>
+            </div>
+
+            <div class="profile-item">
+                <p> Email: <input type="text" name="email" th:field="*{email}"/></p>
+            </div>
+            <div class="profile-item">
+                <p> Designation: <input type="text" name="designation" th:field="*{designation}"/></p>
+            </div>
+
+            <div class="profile-item">
+                <p> HEDL: <input type="text" name="highest_education_level" th:field="*{highest_education_level}"/></p>
+            </div>
+            <div class="profile-item">
+                <p> Department: <input type="text" name="department" th:field="*{department}"/></p>
+            </div>
+            <div class="profile-item">
+                <p> Cell No: <input type="text" name="cell_phone" th:field="*{cell_phone}"/></p>
+            </div>
+
+            <div class="profile-item">
+                <p> Password: <input type="text" name="password" th:field="*{password}"/></p>
+            </div>
+        </div>
+
+        <h2 class="item-middle">Set Authority</h2>
+        <div class="profile-item">
+            <select class="form-control" th:field="*{authorityId}" id="dropOperator">
+                <option value="0">Select Authority</option>
+                <option th:each="authority : ${authorities}" th:value="${authority.getId()}"
+                        th:text="${authority.getAuthority()}"></option>
+            </select>
+        </div>
+        <div class="float-left">
+            <button class="green-btn" type="submit">Create User Profile</button>
+        </div>
+    </form>
+</div>
+
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+<div th:replace="/fragments/header :: header"></div>
+
+<h1>Users</h1>
+
+<div class="row">
+    <div class="">
+        <table  style="width: 100%" th:border="1px">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Cell</th>
+                <th>Department</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.getUsername()}"></td>
+                <td th:text="${user.getFirst_name()}"></td>
+                <td th:text="${user.getLast_name()}"></td>
+                <td th:text="${user.getEmail()}"></td>
+                <td th:text="${user.getCell_phone()}"></td>
+                <td th:text="${user.getDepartment()}"></td>
+                <td class="auth-color">
+                    <ul th:each="authority : ${user.getAuthorities()}">
+                        <li th:text="${authority.getAuthority()}"></li>
+                    </ul>
+                </td>
+                <td><a th:href="@{/user-remove/{id}(id=${user.getId()})}" class="red-btn">Remove</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/head :: head"></head>
+<body>
+<header th:fragment="header">
+    <div class="topnav">
+        <a class="active" th:href="@{/}">Home</a>
+        <span sec:authorize="isAuthenticated()">
+            <a class="left" th:href="@{/profile}">Profile</a>
+        </span>
+        <span sec:authorize="isAuthenticated()">
+            <a class="left" th:href="@{/add-new-publication}">Add Publication</a>
+        </span>
+        <span sec:authorize="isAuthenticated()">
+            <a class="left" th:href="@{/add-new-research}">Add Research</a>
+        </span>
+
+        <span sec:authorize="hasAnyAuthority('ADMIN')">
+            <a class="left" th:href="@{/users}">Users</a>
+        </span>
+
+        <span sec:authorize="hasAnyAuthority('ADMIN')">
+            <a class="left" th:href="@{/add-new-user}">Add User</a>
+        </span>
+
+        <span sec:authorize="hasAnyAuthority('ADMIN')">
+            <a class="left" th:href="@{/add-new-role}">Create Roll</a>
+        </span>
+
+        <span sec:authorize="isAuthenticated()">
+            <a class="right" th:href="@{/logout}">Logout</a>
+        </span>
+        <span sec:authorize="isAuthenticated()">
+            <a class="right">Welcome <span sec:authentication="name"></span> <span sec:authentication="principal.authorities"></span></a>
+
+        </span>
+        <span sec:authorize="!isAuthenticated()">
+        <a class="right" th:href="@{/login}">Log In</a>
+        </span>
+    </div>
+
+</header>
+
+</body>
+</html>
